@@ -35,7 +35,6 @@
             transition: background-image 1s ease-in-out;
         }
 
-        /* Dark overlay for readability */
         #overlay {
             position: absolute;
             top: 0;
@@ -46,7 +45,6 @@
             z-index: 1;
         }
 
-        /* Background Quote Container */
         #bg-quote-container {
             position: absolute;
             top: 50%;
@@ -67,7 +65,6 @@
             text-transform: uppercase;
         }
 
-        /* Main Content */
         #main {
             position: relative;
             z-index: 10;
@@ -97,7 +94,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Skills Pills */
         .skills {
             display: flex;
             justify-content: center;
@@ -116,7 +112,6 @@
             letter-spacing: 1px;
         }
 
-        /* Resume Button */
         .resume-btn {
             display: inline-block;
             background: rgba(255, 255, 255, 0.2);
@@ -138,7 +133,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        /* Floating Tiles Container */
         .tiles-container {
             display: flex;
             justify-content: center;
@@ -146,7 +140,6 @@
             flex-wrap: wrap;
         }
 
-        /* Individual Tile */
         .tile {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
@@ -227,17 +220,17 @@
             <h1>Pushpak Umale</h1>
             <p>Associate Consultant &nbsp;&bull;&nbsp; Data Analyst &nbsp;&bull;&nbsp; Capgemini</p>
             
-            <!-- New: Skills Section -->
             <div class="skills">
                 <span class="skill-pill">SQL</span>
                 <span class="skill-pill">Python</span>
                 <span class="skill-pill">Power BI</span>
-                <span class="skill-pill">Tableau</span>
+                <!-- Replaced Tableau with Machine Learning -->
+                <span class="skill-pill">Machine Learning</span>
                 <span class="skill-pill">Excel</span>
             </div>
 
-            <!-- New: Resume Download Button (Replace # with your actual resume PDF link later) -->
-            <a href="#" class="resume-btn" download><i class="fas fa-file-download"></i> Download Resume</a>
+            <!-- The href points to the exact name of the file you will upload -->
+            <a href="Pushpak_Umale_Resume_DA&BI.pdf" class="resume-btn" download="Pushpak_Umale_Resume.pdf"><i class="fas fa-file-download"></i> Download Resume</a>
         </header>
 
         <div class="tiles-container">
@@ -259,16 +252,14 @@
     </div>
 
     <script>
-        // 1. Data Analytics / Technology Themed Images Array
         const dataImages = [
-            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1920&auto=format&fit=crop', // Data dashboards
-            'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1920&auto=format&fit=crop', // Analytics charts
-            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop', // Matrix / Code
-            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1920&auto=format&fit=crop', // Business metrics
-            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1920&auto=format&fit=crop'  // Server/Database
+            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1920&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1920&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1920&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1920&auto=format&fit=crop' 
         ];
 
-        // 2. Quotes Array
         const quotes = [
             '"Without data, you’re just another person with an opinion." – W. Edwards Deming',
             '"Data is the new oil." – Clive Humby',
@@ -279,24 +270,19 @@
             '"Numbers have an important story to tell. They rely on you to give them a voice." – Stephen Few'
         ];
 
-        // Randomize on every refresh
         const randomImageIndex = Math.floor(Math.random() * dataImages.length);
         const randomQuoteIndex = Math.floor(Math.random() * quotes.length);
         
-        // Update the background quote
         document.getElementById("bg-quote").textContent = quotes[randomQuoteIndex];
 
-        // Fetch the random data image
         const bgImageUrl = dataImages[randomImageIndex];
         
-        // Preload image to avoid white flash
         const img = new Image();
         img.src = bgImageUrl;
         img.onload = () => {
             document.body.style.backgroundImage = `url('${bgImageUrl}')`;
         };
 
-        // Interactive Parallax Effect
         document.addEventListener("mousemove", (e) => {
             const tiles = document.querySelectorAll(".tile");
             const x = (window.innerWidth / 2 - e.pageX) / 40;
