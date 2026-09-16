@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Pushpak Umale</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a;
+            background-size: cover;
+            background-position: center;
+            /* Smooth transition when the image loads */
+            transition: background-image 1s ease-in-out;
+        }
+
+        /* Dark overlay for readability */
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        /* Huge Background Quote Container */
+        #bg-quote-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            text-align: center;
+            z-index: 2;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        #bg-quote {
+            font-size: clamp(2rem, 6vw, 7rem);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Main Content */
+        #main {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+            padding: 2rem;
+        }
+
+        header {
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        /* Floating Tiles Container */
+        .tiles-container {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Individual Tile (Glassmorphism Stack) */
+        .tile {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+            border-left: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            width: 190px;
+            text-decoration: none;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            /* Smooth transitions for hover */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        background 0.3s, 
+                        box-shadow 0.3s;
+            /* Infinite floating animation */
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Staggered float speeds to make them look independent */
+        .tile:nth-child(1) { animation-delay: 0s; }
+        .tile:nth-child(2) { animation-delay: 1.5s; }
+        .tile:nth-child(3) { animation-delay: 3s; }
+
+        .tile i {
+            font-size: 3.5rem;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .tile span {
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        /* Hover Effects */
+        .tile:hover {
+            transform: translateY(-20px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5);
+            /* Pause float on hover so it stays raised */
+            animation-play-state: paused;
+        }
+
+        .tile:hover i {
+            transform: scale(1.2);
+        }
+
+        /* Brand Colors on Hover */
+        .tile.linkedin:hover i { color: #0077b5; }
+        .tile.github:hover i { color: #ffffff; }
+        .tile.email:hover i { color: #ea4335; }
+
+        /* Keyframes */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tiles-container { gap: 1.5rem; }
+            .tile { width: 150px; padding: 2rem 1rem; }
+            .tile i { font-size: 2.5rem; }
+            header h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body class="is-preload">
+
+    <!-- Dark Gradient Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Background Quote -->
+    <div id="bg-quote-container">
+        <h1 id="bg-quote"></h1>
+    </div>
+
+    <!-- Main Interfce -->
+    <div id="main">
+        <header id="header">
+            <h1>Pushpak Umale</h1>
+            <p>Associate Consultant &nbsp;&bull;&nbsp; Data Analyst &nbsp;&bull;&nbsp; Capgemini</p>
+        </header>
+
+        <!-- Stacks / Tiles Container -->
+        <div class="tiles-container">
+            <a href="https://www.linkedin.com/in/pushpakumale" target="_blank" class="tile linkedin">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+            </a>
+            
+            <a href="https://github.com/pushpakumale" target="_blank" class="tile github">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </a>
+            
+            <a href="mailto:pushpakumale.careerinfo@gmail.com" class="tile email">
+                <i class="fas fa-envelope"></i>
+                <span>Email</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Quotes List
+        const quotes = [
+            '"Invent the future." – Nikola Tesla',
+            '"Stay hungry, stay foolish." – Steve Jobs',
+            '"Code is like humor. When you have to explain it, it’s bad." – Cory House',
+            '"Programs must be written for people to read." – Harold Abelson',
+            '"Talk is cheap. Show me the code." – Linus Torvalds',
+            '"Simplicity is the soul of efficiency." – Austin Freeman',
+            '"First, solve the problem. Then, write the code." – John Johnson'
+        ];
+
+        // Unique daily index
+        const today = new Date();
+        const dayIndex = today.getFullYear() * 1000 + today.getMonth() * 100 + today.getDate();
+        
+        // 1. Update the background quote daily
+        const quoteIndex = dayIndex % quotes.length;
+        document.getElementById("bg-quote").textContent = quotes[quoteIndex];
+
+        // 2. Fetch a unique daily background image
+        // Using a seed parameter based on the dayIndex ensures the image only changes once per day
+        const bgImageUrl = `https://picsum.photos/seed/${dayIndex}/1920/1080`;
+        
+        // Preload image to avoid white flash
+        const img = new Image();
+        img.src = bgImageUrl;
+        img.onload = () => {
+            document.body.style.backgroundImage = `url('${bgImageUrl}')`;
+        };
+
+        // 3. Interactive Parallax Effect for Tiles (Reacts to cursor movement)
+        document.addEventListener("mousemove", (e) => {
+            const tiles = document.querySelectorAll(".tile");
+            // Calculate mouse distance from center
+            const x = (window.innerWidth / 2 - e.pageX) / 40;
+            const y = (window.innerHeight / 2 - e.pageY) / 40;
+            
+            tiles.forEach(tile => {
+                // Apply slight movement away from the mouse, avoiding conflicts when hovering directly
+                if(!tile.matches(':hover')) {
+                    tile.style.transform = `translateY(${y}px) translateX(${x}px)`;
+                }
+            });
+        });
+
+        // Reset positions when the cursor leaves the window
+        document.addEventListener("mouseleave", () => {
+            document.querySelectorAll(".tile").forEach(tile => {
+                tile.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
