@@ -32,7 +32,6 @@
             background-color: #1a1a1a;
             background-size: cover;
             background-position: center;
-            /* Smooth transition when the image loads */
             transition: background-image 1s ease-in-out;
         }
 
@@ -43,11 +42,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%);
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%);
             z-index: 1;
         }
 
-        /* Huge Background Quote Container */
+        /* Background Quote Container */
         #bg-quote-container {
             position: absolute;
             top: 50%;
@@ -79,7 +78,7 @@
         }
 
         header {
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
             animation: fadeInDown 1s ease-out;
         }
 
@@ -95,6 +94,48 @@
             font-weight: 300;
             opacity: 0.9;
             letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Pills */
+        .skills {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .skill-pill {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Resume Button */
+        .resume-btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin-bottom: 3rem;
+        }
+
+        .resume-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
         /* Floating Tiles Container */
@@ -105,7 +146,7 @@
             flex-wrap: wrap;
         }
 
-        /* Individual Tile (Glassmorphism Stack) */
+        /* Individual Tile */
         .tile {
             background: var(--glass-bg);
             backdrop-filter: blur(16px);
@@ -123,15 +164,10 @@
             align-items: center;
             gap: 1.2rem;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            /* Smooth transitions for hover */
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        background 0.3s, 
-                        box-shadow 0.3s;
-            /* Infinite floating animation */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, box-shadow 0.3s;
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Staggered float speeds to make them look independent */
         .tile:nth-child(1) { animation-delay: 0s; }
         .tile:nth-child(2) { animation-delay: 1.5s; }
         .tile:nth-child(3) { animation-delay: 3s; }
@@ -147,25 +183,18 @@
             letter-spacing: 1px;
         }
 
-        /* Hover Effects */
         .tile:hover {
             transform: translateY(-20px) scale(1.05);
             background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.5);
-            /* Pause float on hover so it stays raised */
             animation-play-state: paused;
         }
 
-        .tile:hover i {
-            transform: scale(1.2);
-        }
-
-        /* Brand Colors on Hover */
+        .tile:hover i { transform: scale(1.2); }
         .tile.linkedin:hover i { color: #0077b5; }
         .tile.github:hover i { color: #ffffff; }
         .tile.email:hover i { color: #ea4335; }
 
-        /* Keyframes */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
@@ -177,7 +206,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .tiles-container { gap: 1.5rem; }
             .tile { width: 150px; padding: 2rem 1rem; }
@@ -188,22 +216,30 @@
 </head>
 <body class="is-preload">
 
-    <!-- Dark Gradient Overlay -->
     <div id="overlay"></div>
 
-    <!-- Background Quote -->
     <div id="bg-quote-container">
         <h1 id="bg-quote"></h1>
     </div>
 
-    <!-- Main Interfce -->
     <div id="main">
         <header id="header">
             <h1>Pushpak Umale</h1>
             <p>Associate Consultant &nbsp;&bull;&nbsp; Data Analyst &nbsp;&bull;&nbsp; Capgemini</p>
+            
+            <!-- New: Skills Section -->
+            <div class="skills">
+                <span class="skill-pill">SQL</span>
+                <span class="skill-pill">Python</span>
+                <span class="skill-pill">Power BI</span>
+                <span class="skill-pill">Tableau</span>
+                <span class="skill-pill">Excel</span>
+            </div>
+
+            <!-- New: Resume Download Button (Replace # with your actual resume PDF link later) -->
+            <a href="#" class="resume-btn" download><i class="fas fa-file-download"></i> Download Resume</a>
         </header>
 
-        <!-- Stacks / Tiles Container -->
         <div class="tiles-container">
             <a href="https://www.linkedin.com/in/pushpakumale" target="_blank" class="tile linkedin">
                 <i class="fab fa-linkedin"></i>
@@ -223,28 +259,35 @@
     </div>
 
     <script>
-        // Quotes List
-        const quotes = [
-            '"Invent the future." – Nikola Tesla',
-            '"Stay hungry, stay foolish." – Steve Jobs',
-            '"Code is like humor. When you have to explain it, it’s bad." – Cory House',
-            '"Programs must be written for people to read." – Harold Abelson',
-            '"Talk is cheap. Show me the code." – Linus Torvalds',
-            '"Simplicity is the soul of efficiency." – Austin Freeman',
-            '"First, solve the problem. Then, write the code." – John Johnson'
+        // 1. Data Analytics / Technology Themed Images Array
+        const dataImages = [
+            'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1920&auto=format&fit=crop', // Data dashboards
+            'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1920&auto=format&fit=crop', // Analytics charts
+            'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1920&auto=format&fit=crop', // Matrix / Code
+            'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1920&auto=format&fit=crop', // Business metrics
+            'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1920&auto=format&fit=crop'  // Server/Database
         ];
 
-        // Unique daily index
-        const today = new Date();
-        const dayIndex = today.getFullYear() * 1000 + today.getMonth() * 100 + today.getDate();
-        
-        // 1. Update the background quote daily
-        const quoteIndex = dayIndex % quotes.length;
-        document.getElementById("bg-quote").textContent = quotes[quoteIndex];
+        // 2. Quotes Array
+        const quotes = [
+            '"Without data, you’re just another person with an opinion." – W. Edwards Deming',
+            '"Data is the new oil." – Clive Humby',
+            '"In God we trust, all others must bring data." – W. Edwards Deming',
+            '"Torture the data, and it will confess to anything." – Ronald Coase',
+            '"The goal is to turn data into information, and information into insight." – Carly Fiorina',
+            '"Data really powers everything that we do." – Jeff Weiner',
+            '"Numbers have an important story to tell. They rely on you to give them a voice." – Stephen Few'
+        ];
 
-        // 2. Fetch a unique daily background image
-        // Using a seed parameter based on the dayIndex ensures the image only changes once per day
-        const bgImageUrl = `https://picsum.photos/seed/${dayIndex}/1920/1080`;
+        // Randomize on every refresh
+        const randomImageIndex = Math.floor(Math.random() * dataImages.length);
+        const randomQuoteIndex = Math.floor(Math.random() * quotes.length);
+        
+        // Update the background quote
+        document.getElementById("bg-quote").textContent = quotes[randomQuoteIndex];
+
+        // Fetch the random data image
+        const bgImageUrl = dataImages[randomImageIndex];
         
         // Preload image to avoid white flash
         const img = new Image();
@@ -253,22 +296,19 @@
             document.body.style.backgroundImage = `url('${bgImageUrl}')`;
         };
 
-        // 3. Interactive Parallax Effect for Tiles (Reacts to cursor movement)
+        // Interactive Parallax Effect
         document.addEventListener("mousemove", (e) => {
             const tiles = document.querySelectorAll(".tile");
-            // Calculate mouse distance from center
             const x = (window.innerWidth / 2 - e.pageX) / 40;
             const y = (window.innerHeight / 2 - e.pageY) / 40;
             
             tiles.forEach(tile => {
-                // Apply slight movement away from the mouse, avoiding conflicts when hovering directly
                 if(!tile.matches(':hover')) {
                     tile.style.transform = `translateY(${y}px) translateX(${x}px)`;
                 }
             });
         });
 
-        // Reset positions when the cursor leaves the window
         document.addEventListener("mouseleave", () => {
             document.querySelectorAll(".tile").forEach(tile => {
                 tile.style.transform = '';
